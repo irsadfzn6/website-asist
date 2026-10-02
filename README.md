@@ -130,20 +130,25 @@ Beberapa hal yang perlu diketahui sebelum dipakai di server publik:
   session fixation.
 - Tidak ada rate limiting pada endpoint login.
 
-## Known Issues
+## Catatan Known Issues
 
-- **`absensi_mapel` tidak ada.** `pages.php` baris 66 menjalankan
-  `DELETE FROM absensi_mapel WHERE tanggal<>'$tanggal'` sebagai efek samping pada
-  setiap halaman. Tabel ini tidak ada di dump SQL mana pun yang disertakan.
-  Halaman tetap tampil karena query dijalankan setelah `endif`, tetapi di
-  server dengan `display_errors=On` (default XAMPP!) error ini muncul sebagai
-  `Uncaught mysqli_sql_exception` di response. Buat tabelnya, atau hapus
-  baris tersebut bila fitur absensi mapel memang tidak dipakai.
-- **Tiga folder tidak ikut dalam arsip sumber:** `gtt/`, `tugas/`, dan
-  `pengaturan/`. `pages.php` masih mereferensikannya, tapi tidak ada tautan
-  menu yang menuju ke sana — fitur lama yang sudah tidak aktif. Halaman-halaman
-  tersebut akan gagal dengan `include` error bila diakses langsung.
-- Query `DELETE` di `pages.php:66` juga tidak meng-escape `$tanggal`.
+Tiga hal di bawah sudah dikonfirmasi oleh pemilik repositori sebagai
+** disengaja**, bukan kelalaian:
+
+- **Tabel `absensi_mapel` memang tidak dipakai.** `pages.php` baris 66
+  menjalankan `DELETE FROM absensi_mapel WHERE tanggal<>'$tanggal'` di setiap
+  halaman, padahal tabelnya tidak ada di dump SQL mana pun. Karena query itu
+  berjalan setelah `endif`, halaman tetap ter-render — tetapi di XAMPP dengan
+  `display_errors=On` (default), hasilnya tetap memunculkan
+  `Uncaught mysqli_sql_exception` di footer setiap halaman.
+  Kalau tidak ada yang memakai fitur ini, hapus saja baris 66 tersebut.
+- **Folder `gtt/`, `tugas/`, dan `pengaturan/` sengaja tidak disertakan.**
+  `pages.php` masih menyisipkan rujukan ke sana, jadi ketiga folder itu akan
+  menghasilkan `include` error bila diakses langsung. Tidak ada tautan menu
+  yang menuju ke sana, jadi alur normal aplikasi tidak pernah menyentuh
+  kode tersebut.
+- Query `DELETE` di `pages.php:66` juga tidak meng-escape `$tanggal` — kalau
+  nanti tabelnya dipakai, perbaiki dua hal ini bersamaan.
 
 ## Lisensi
 
