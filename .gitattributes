@@ -1,0 +1,20 @@
+# Libreri pihak ketiga — vendored, bukan ditulis tangan.
+# Tandai sebagai binary agar diff dan merge tidak mencoba membandingkan
+# baris-baris minified-nya.
+*.min.js    binary
+*.min.css   binary
+*.map       binary
+*.min.map   binary
+
+# Aset dan dokumen
+*.pdf       binary
+*.docx      binary
+*.xlsx      binary
+*.png       binary
+*.jpg       binary
+*.gif       binary
+*.ico       binary
+*.woff      binary
+*.woff2     binary
+*.ttf       binary
+*.eot       binary

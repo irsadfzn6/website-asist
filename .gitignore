@@ -1,0 +1,28 @@
+# --- Upload / dokumen asli (tidak ikut di-commit, lihat README) ---
+/uploads/
+/surat_masuk/uploads/
+/surat_keluar/uploads/
+/kegiatan/uploads/
+/images/fotoguru/
+/assets/inc/*/uploads/
+
+# --- Kredensial lokal (jangan pernah di-commit) ---
+konek/koneksi.local.php
+*.local.php
+.env
+
+# --- Backup & editor OS ---
+*.sql.bak
+*.sql.gz
+Thumbs.db
+desktop.ini
+.DS_Store
+*~
+*.swp
+.vscode/
+.idea/
+
+# --- Log & cache runtime ---
+*.log
+error_log
+.cache/
